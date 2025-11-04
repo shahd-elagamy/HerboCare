@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Herbal Recommendation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e8f5e9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    h1 {
+      color: #1b5e20;
+      margin: 40px 0 20px;
+      opacity: 0;
+      transform: translateY(-50px);
+      animation: slideDown 1.2s ease-out forwards;
+    }
+
+    @keyframes slideDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    form {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 25px;
+      margin-left: 10px;
+      background-color: #388e3c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2e7d32;
+    }
+
+    .herb-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .herb-box {
+      background: white;
+      border: 1px solid #c8e6c9;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .herb-box:hover {
+      transform: scale(1.02);
+    }
+
+    .herb-box img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .herb-box h3 {
+      color: #1b5e20;
+      margin-bottom: 10px;
+    }
+
+    .herb-box p {
+      color: #444;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .no-results {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+      margin-top: 40px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #2e7d32;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Image modal (popup) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      margin: 5% auto;
+      display: block;
+      width: 60%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .modal-content {
+        width: 90%;
+      }
+    }
+      a.back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a.back:hover {
+            text-decoration: underline;
+        }
+  </style>
+</head>
+<body>
+  <h1>🌿 Herbal Recommendation</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="symptom" placeholder="Enter your symptoms (e.g. headache, stress)" value="{{ user_input }}">
+    <button type="submit">Get Herbs</button>
+  </form>
+
+  <div class="herb-container">
+    {% if herbs %}
+      {% for herb in herbs %}
+        <div class="herb-box">
+          {% if herb.image_url %}
+            <img src="{{ herb.image_url }}" alt="{{ herb.name }}" onclick="openModal(this.src)">
+          {% endif %}
+          <h3><a href="{% url 'herb_detail' herb.id %}">{{ herb.name }}</a></h3>
+          <p><strong>Usage:</strong> {{ herb.usage }}</p>
+          {% if herb.warning %}
+            <p><strong>Warning:</strong> {{ herb.warning }}</p>
+          {% endif %}
+          {% if herb.id in favorite_ids %}
+            <div class="star" title="Already in favorites">⭐</div>
+          {% else %}
+            <a href="{% url 'accounts:add_to_favorites' herb.id %}" class="cta-button">💚 Add to Favorites</a>
+          {% endif %}
+
+
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="no-results">
+        No herbs found for the entered symptoms.
+      </div>
+    {% endif %}
+  </div>
+            <a class="back" href="{% url 'home' %}">← Back to Home</a>
+
+  <!-- Modal for image preview -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    function openModal(src) {
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImage");
+      modal.style.display = "block";
+      modalImg.src = src;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("imageModal");
+      modal.style.display = "none";
+    }
+  </script>
+</body>
+</html>

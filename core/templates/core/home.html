@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Home | Herbal Healing</title>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    body.light-mode {
+      background-color: #f8fff8;
+      color: #000;
+    }
+
+    body.dark-mode {
+  background: linear-gradient(rgba(18,18,18,0.9), rgba(18,18,18,0.9)), url("/media/herbs/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #e0e0e0;
+}
+
+body.dark-mode nav {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+body.dark-mode .toggle-theme {
+  background: #333;
+  color: #fff;
+  border-color: #ccc;
+}
+
+body.dark-mode .content {
+  color: #c8e6c9;
+}
+
+body.dark-mode .herb-card {
+  background: rgba(40, 40, 40, 0.95);
+  color: #e0e0e0;
+  box-shadow: 0 2px 8px rgba(255,255,255,0.05);
+}
+
+body.dark-mode .herb-card h3 {
+  color: #a5d6a7;
+}
+
+body.dark-mode .popular-herbs h2 {
+  color: #a5d6a7;
+}
+
+body.dark-mode .cta-button {
+  background-color: #2e7d32;
+  color: white;
+}
+
+body.dark-mode .cta-button:hover {
+  background-color: #1b5e20;
+}
+
+
+    .container.dark-mode {
+      background-color: #2a2a2a;
+      border-color: #555;
+    }
+
+.toggle-theme {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  background: #fff;
+  border: 2px solid #4caf50;
+  color: #4caf50;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 46px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+
+    body.dark-mode .toggle-theme {
+      background: #333;
+      color: #fff;
+      border-color: #ccc;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("/media/herbs/bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #222;
+    }
+
+    nav {
+      background-color: #43a448;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    nav h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      font-style: bold;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      text-align: center;
+      margin: 40px auto 20px;
+      max-width: 700px;
+      animation: fadeIn 1.5s ease-in;
+      color:#1b5e20;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .search-bar {
+      text-align: center;
+      margin: 30px auto 10px;
+    }
+
+    .search-bar input[type="text"] {
+      padding: 14px 25px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 40px;
+      border: 2px solid #2e7d32;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-size: 18px;
+      transition: 0.3s ease;
+    }
+
+    .search-bar input[type="text"]:focus {
+      border-color: #1b5e20;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    .swiper {
+      width: 80%;
+      max-width: 800px;
+      padding: 20px;
+      margin: 0 auto 40px;
+    }
+
+    .swiper-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      width: 50%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .swiper-slide div {
+      text-align: center;
+      margin-top: 10px;
+      color: #2e7d32;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .swiper-slide div:hover {
+      color: #1b5e20;
+      transform: scale(1.05);
+    }
+
+    .herb-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 20px auto 60px;
+      max-width: 1000px;
+    }
+
+    .herb-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      border-radius: 12px;
+      width: 200px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .herb-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .herb-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .herb-card h3 {
+      margin: 10px 0 0;
+      color: #2e7d32;
+      font-size: 18px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #388e3c;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: #2e7d32;
+    }
+
+    .popular-herbs {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .popular-herbs h2 {
+      margin-bottom: 20px;
+      color: #2e7d32;
+    }
+  </style>
+</head>
+
+<body class="light-mode">
+
+ 
+  <!-- Navbar -->
+ <nav>
+  <h2>🌿 HerboCare</h2>
+
+  <div style="display: flex; align-items: center; gap: 20px;">
+    <ul style="margin: 0;">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'recommend' %}">Recommendation</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'accounts:dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'accounts:login' %}">Login</a></li>
+        <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+      {% endif %}
+    </ul>
+
+  </div>
+</nav>
+<button class="toggle-theme" onclick="toggleTheme()">☀️</button>
+
+
+  <!-- Search -->
+  <div class="search-bar">
+    <input type="text" id="herbSearch" placeholder="Search for an herb... (e.g. mint, lavender)">
+  </div>
+
+  <!-- Search Results -->
+  <div id="searchResults" class="herb-cards" style="display: none;">
+    {% for herb in herbs %}
+      <div class="herb-card" data-name="{{ herb.name|lower }}">
+        <img src="{{ herb.image_url }}" alt="{{ herb.name }}">
+        <h3>{{ herb.name }}</h3>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Welcome Content -->
+  <div class="content">
+    <h2>Welcome to Herbal Healing</h2>
+    <p>
+      Discover natural remedies and the power of traditional herbs.<br>
+      Search by symptoms or explore recommended treatments tailored to your needs.
+    </p>
+    <a href="{% url 'recommend' %}" class="cta-button">🌿 Get Your Herbal Match</a>
+  </div>
+
+  <!-- Swiper Banner -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {% for herb in herbs %}
+        {% if herb.image_url %}
+          <div class="swiper-slide">
+            <img src="{{ herb.image_url }}" alt="{{ herb.name }}">
+            <div>{{ herb.name }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <!-- Most Recent Herbs -->
+  <div class="popular-herbs">
+    <h2>Most Recent Herbs</h2>
+    <div class="herb-cards">
+      {% for herb in herbs|slice:":3" %}
+        <div class="herb-card" data-name="{{ herb.name|lower }}">
+          <img src="{{ herb.image_url }}" alt="{{ herb.name }}">
+          <h3>{{ herb.name }}</h3>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Swiper Init -->
+  <script>
+    const swiper = new Swiper(".mySwiper", {
+      loop: true,
+      spaceBetween: 20,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+
+  <!-- Search Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("herbSearch");
+      const herbCards = document.querySelectorAll("#searchResults .herb-card");
+      const resultsContainer = document.getElementById("searchResults");
+
+      searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase().trim();
+        let found = false;
+
+        herbCards.forEach(card => {
+          const herbName = card.getAttribute("data-name");
+          if (herbName.includes(query) && query !== "") {
+            card.style.display = "block";
+            found = true;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        resultsContainer.style.display = (found && query !== "") ? "flex" : "none";
+      });
+    });
+  </script>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedTheme = localStorage.getItem("theme");
+      const body = document.body;
+      const toggleButton = document.querySelector(".toggle-theme");
+
+      if (savedTheme) {
+        body.className = savedTheme;
+        toggleButton.textContent = savedTheme === "dark-mode" ? "🌙" : "☀️";
+      }
+    });
+
+    function toggleTheme() {
+      const body = document.body;
+      const toggleButton = document.querySelector(".toggle-theme");
+
+      if (body.classList.contains("light-mode")) {
+        body.classList.remove("light-mode");
+        body.classList.add("dark-mode");
+        toggleButton.textContent = "🌙";
+        localStorage.setItem("theme", "dark-mode");
+      } else {
+        body.classList.remove("dark-mode");
+        body.classList.add("light-mode");
+        toggleButton.textContent = "☀️";
+        localStorage.setItem("theme", "light-mode");
+      }
+    }
+  </script>
+
+</body>
+</html>

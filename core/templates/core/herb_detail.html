@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ herb.name }}</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8fff8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #c8e6c9;
+            width: 100%;
+        }
+
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        a.back {
+            display: inline-block;
+            margin-top: 25px;
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a.back:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            width: 300px;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ herb.name }}</h1>
+    <p><strong>Usage:</strong> {{ herb.usage }}</p>
+    {% if herb.warning %}
+        <p><strong>Warning:</strong> {{ herb.warning }}</p>
+    {% endif %}
+
+    {% if herb.image_url %}
+        <img src="{{ herb.image_url }}" alt="{{ herb.name }}">
+    {% endif %}
+
+    <a class="back" href="{% url 'recommend' %}">← Back to Recommendations</a>
+</div>
+</body>
+</html>

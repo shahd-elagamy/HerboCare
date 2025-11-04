@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | HerboCare</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f1f8e9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 50px 20px;
+      margin: 0;
+    }
+
+    .dashboard {
+      background: white;
+      padding: 30px 50px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    h2 {
+      color: #2e7d32;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      margin: 20px 0;
+    }
+
+    a {
+      display: inline-block;
+      background-color: #388e3c;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: #2e7d32;
+    }
+
+    .herb-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .herb-card {
+      background: #f9fbe7;
+      border: 1px solid #c5e1a5;
+      border-radius: 10px;
+      padding: 15px;
+      width: 200px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .herb-card:hover {
+      transform: scale(1.03);
+    }
+
+    .herb-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .herb-card h3 {
+      margin: 0;
+      color: #33691e;
+      font-size: 16px;
+    }
+
+    .remove-btn {
+      display: inline-block;
+      background-color: #e53935;
+      color: white;
+      padding: 6px 12px;
+      margin-top: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .remove-btn:hover {
+      background-color: #c62828;
+    }
+
+    .no-favorites {
+      color: #888;
+      font-style: italic;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h2>Welcome, {{ request.user.username }}! 🌿</h2>
+    <p>This is your dashboard. 🚀</p>
+
+    <h2>Favorites</h2>
+    <div class="herb-cards">
+      {% for herb in favorites %}
+        <div class="herb-card">
+          <img src="{{ herb.image_url }}" alt="{{ herb.name }}">
+          <h3>{{ herb.name }}</h3>
+          <a href="{% url 'accounts:remove_from_favorites' herb.id %}" class="remove-btn">❌ Remove</a>
+        </div>
+      {% empty %}
+        <p class="no-favorites">No favorites added yet.</p>
+      {% endfor %}
+    </div>
+
+    <a href="{% url 'accounts:logout' %}">Logout</a>
+    <a href="{% url 'home' %}">🏠 Home</a>
+  </div>
+</body>
+</html>

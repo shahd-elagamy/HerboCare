@@ -2,7 +2,7 @@
 
 ### AI-Powered Web Platform for Personalized Herbal Remedies
 
-**HerboCare** is an intelligent web platform designed to recommend natural herbal treatments tailored to individual users.
+**HerboCare** is an intelligent web platform that recommends natural herbal treatments tailored to individual users.
 The system leverages **Django**, modern web technologies, and **machine learning models** to provide personalized healthcare suggestions, focusing on natural medicine and AI-driven recommendation systems.
 
 ---
@@ -10,9 +10,10 @@ The system leverages **Django**, modern web technologies, and **machine learning
 ## Key Features
 
 * **Personalized Herbal Recommendations** – AI-based suggestions tailored to user health data
-* **Web Interface** – built with HTML, CSS, and Django for responsive and dynamic user experience
-* **Machine Learning Models** – process user inputs to provide optimized herbal treatment suggestions
+* **Web Interface** – built with HTML, CSS, and Django for a responsive and dynamic experience
+* **Machine Learning Models** – analyze user inputs to provide optimized herbal treatment suggestions
 * **Healthcare Focus** – promotes natural remedies and intelligent decision support for wellness
+* **Secure Data Handling** – user input and history are stored safely using PostgreSQL
 
 ---
 
@@ -26,11 +27,37 @@ The system leverages **Django**, modern web technologies, and **machine learning
 
 ---
 
+## System Architecture
+
+* **User Input:** Health data and preferences collected via web forms
+* **Processing:** Machine learning models analyze inputs to generate personalized herbal suggestions
+* **Output:** Recommended herbal treatments displayed on the web interface, including dosage and usage guidance
+* **Potential Integration:** Future mobile app or IoT health monitoring devices for real-time suggestions
+
+---
+
 ## Screenshots
 
-<img width="1280" height="545" alt="image" src="https://github.com/user-attachments/assets/fbc79567-3dd3-45ca-912d-6d116567ff68" />
-<img width="1256" height="732" alt="image" src="https://github.com/user-attachments/assets/39cd0fd5-9384-4b87-a5c7-6b22e68dc3e8" />
-<img width="1280" height="548" alt="image" src="https://github.com/user-attachments/assets/5425bac3-3259-4608-afaf-23a559b4ce2e" />
+**Web Interface & Recommendations**
+
+<img width="1280" height="545" alt="web interface" src="https://github.com/user-attachments/assets/fbc79567-3dd3-45ca-912d-6d116567ff68" />
+
+**Personalized AI Suggestions**
+
+<img width="1256" height="732" alt="AI recommendations" src="https://github.com/user-attachments/assets/39cd0fd5-9384-4b87-a5c7-6b22e68dc3e8" />
+
+**User Interaction & Data Handling**
+
+<img width="1280" height="548" alt="data handling" src="https://github.com/user-attachments/assets/5425bac3-3259-4608-afaf-23a559b4ce2e" />
+
+---
+
+## Potential Improvements
+
+* Integration with **mobile applications** for on-the-go herbal recommendations
+* Expansion of the AI models to include **more health parameters and herbal databases**
+* Implementation of **real-time feedback** from users to improve recommendation accuracy
+* Support for **multi-language recommendations** to reach wider audiences
 
 ---
 
